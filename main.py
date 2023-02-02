@@ -1,3 +1,4 @@
+import os
 def create_cook_book():
     cook_book = {}
     with open("recipes.txt", "r", encoding="utf-8") as f:
@@ -39,5 +40,21 @@ def print_shop_list(shop_list):
         print(f"{ingredient} - {shop_list[ingredient]['quantity']} {shop_list[ingredient]['measure']}")
 
 
+
+def sort_txt_files_by_length():
+    file_length = {}
+    for filename in os.listdir("task 3 files"):
+        with open(f"task 3 files\\{filename}", 'r', encoding='utf-8') as file:
+            file_length[f'{filename}'] = len(file.read().split("\n"))
+
+    sorted_by_length = sorted(file_length.items(), key=lambda item:item[1])
+    for file_tuple in sorted_by_length:
+        with open(f"task 3 files\\{file_tuple[0]}", 'r', encoding="utf-8") as f:
+            print(f"Имя файла: {file_tuple[0]}")
+            print(f"Количество строк: {file_tuple[1]}")
+            print(f.read())
+
+
 shop_list = get_shop_list_by_dishes(["Омлет", "Запеканка"], 3)
 print_shop_list(shop_list)
+sort_txt_files_by_length()
